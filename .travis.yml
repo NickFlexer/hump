@@ -1,38 +1,27 @@
-dist: precise
-sudo: false      # Use container-based infrastructure
 language: python
+sudo: false
 
-git:
-  depth: 4
-
-#Testing with lastest stable version of LUAJIT
 env:
-  - LUA_RUNTIME="luajit"
-    LUA_VERSION="2.0.5"
-  #- LUA_RUNTIME="luajit"
-  #  LUA_VERSION="2.1"
+  - LUA="lua=5.1"
+  - LUA="lua=5.2"
+  - LUA="lua=5.3"
+  - LUA="luajit=2.0"
+  - LUA="luajit=2.1"
 
 before_install:
   - pip install hererocks
-  - hererocks lua_installations/$LUA_RUNTIME$LUA_VERSION/ --luarocks ^ --$LUA_RUNTIME $LUA_VERSION
-  - export PATH=$PATH:$PWD/lua_installations/$LUA_RUNTIME$LUA_VERSION/bin
+  - hererocks lua_install -r^ --$LUA
+  - export PATH=$PATH:$PWD/lua_install/bin
 
-before_script:
+install:
+  - luarocks install luacheck
   - luarocks install busted
-  - busted --version
+  - luarocks install luacov
+  - luarocks install luacov-coveralls
 
 script:
-  - busted --output=TAP  #default utfTerminal
+  # - luacheck --std max+busted *.lua spec
+  - busted --verbose --coverage
 
-#Checks if Luajit and luarocks are already installed
-#Comment out to reinstall or if changing versions
-cache:
-  directories:
-    - $PWD/lua_installations
-
-# Can add email notification here
-#notifications:
-  #email:
-    #recipients:
-      #- email@here.com
-    #on_failure: always   #default always
+after_success:
+  - luacov-coveralls -e spec -e tests -e $TRAVIS_BUILD_DIR/lua_install
