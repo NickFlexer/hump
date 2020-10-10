@@ -2,7 +2,9 @@ hump - Helper Utilities for Massive Progression
 ===============================================
 
 **hump** is a small collection of tools for developing games with L&Ouml;VE.
+
 [![Build Status](https://travis-ci.org/NickFlexer/hump.svg?branch=specs)](https://travis-ci.org/NickFlexer/hump)
+[![Coverage Status](https://coveralls.io/repos/github/NickFlexer/hump/badge.svg?branch=specs)](https://coveralls.io/github/NickFlexer/hump?branch=specs)
 
 Contents:
 ------------
