@@ -268,8 +268,14 @@ describe("Camera", function ()
         end)
 
         it("single arg is not function", function ()
+            local expected_string = "attempt to call local 'func' (a string value)"
+
+            if _VERSION:match("%d+%.%d+") == "5.3" then
+                expected_string = "attempt to call a string value (local 'func')"
+            end
+
             local c = camera.new(1, 1)
-            assert.has_error(function () c:draw("aaaa") end, "attempt to call a string value (local 'func')")
+            assert.has_error(function () c:draw("aaaa") end, expected_string)
         end)
 
         teardown(function()

@@ -18,13 +18,18 @@ Contents:
 *   *camera.lua*: Move-, zoom- and rotatable camera with camera locking and movement smoothing.
 
 Documentation
-=============
+------------
 
 You can find the documentation here: [hump.readthedocs.org](http://hump.readthedocs.org)
 
+Testing
+------------
+
+You can find the tests in the ```spec``` folder. They are defined using the [busted](http://olivinelabs.com/busted/) test framework. To run the suite, install busted and simply execute ```busted``` in the hump directory.
+
 
 License
-=======
+------------
 > Copyright (c) 2010-2018 Matthias Richter  
 >  
 > Permission is hereby granted, free of charge, to any person obtaining a copy  
