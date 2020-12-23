@@ -107,7 +107,7 @@ setmetatable(GS, {__index = function(_, func)
 		function_cache[func] = function_cache[func] or function(...)
 		        return (stack[#stack][func] or __NULL__)(stack[#stack], ...)
 		end
-		return function_cache
+		return function_cache[func]
 	end
 	return __NULL__
 end})
